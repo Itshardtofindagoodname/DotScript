@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="images/s.png" title="Favicon"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <title>Genetic Chatbot</title>
+</head>
+<body>
+  <div id="/genetic"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const showChatbot = false;
+
+      function loadChatbot() {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.botpress.cloud/webchat/v0/inject.js';
+        script.async = true;
+        document.body.appendChild(script);
+
+        script.onload = function () {
+            window.botpressWebChat.init({
+          "composerPlaceholder": "Ask a question",
+          "botConversationDescription": "Ask Medical/Genetical questions",
+          "botId": "f15f91d1-d64f-416c-bbe8-0fc5279d49ad",
+          "clientId": "f15f91d1-d64f-416c-bbe8-0fc5279d49ad",
+          "hostUrl": "https://cdn.botpress.cloud/webchat/v0",
+          "messagingUrl": "https://messaging.botpress.cloud",
+          "avatarUrl": "data:image/png;base64,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",
+          "emailAddress": "debarjunthakur020@gmail.com",
+          "botName": "Genetic Bot",
+          "containerWidth": "100%25",
+          "layoutWidth": "100%25",
+          "hideWidget": true,
+          "disableAnimations": true,
+          "frontendVersion": "v1",
+          "useSessionStorage": true,
+          "showBotInfoPage": false,
+          "enableConversationDeletion": true,
+          "theme": "prism",
+          "themeColor": "#2563eb"
+        });
+
+          window.botpressWebChat.onEvent(
+            function () {
+              window.botpressWebChat.sendEvent({ type: "show" });
+            },
+            ["LIFECYCLE.LOADED"]
+          );
+        };
+      }
+
+      function showLoadingOverlay() {
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.id = 'loading-overlay';
+        loadingOverlay.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black';
+
+        loadingOverlay.innerHTML = `
+          <svg class="h-8 w-8 text-gray-300 animate-bounce mr-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24">
+            <circle class="opacity-100" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="100"></circle>
+            <path class="opacity-75" fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+            </path>
+          </svg>
+
+          <span class="text-gray-600 text-3xl font-bold animate-pulse">Loading...</span>
+        `;
+
+        document.body.appendChild(loadingOverlay);
+      }
+
+      function hideLoadingOverlay() {
+        const loadingOverlay = document.getElementById('loading-overlay');
+        if (loadingOverlay) {
+          loadingOverlay.remove();
+        }
+      }
+
+      function init() {
+        if (showChatbot) {
+          loadChatbot();
+        } else {
+          showLoadingOverlay();
+          setTimeout(function () {
+            hideLoadingOverlay();
+            loadChatbot();
+          }, 2000);
+        }
+      }
+
+      init();
+    });
+  </script>
+</body>
+</html>

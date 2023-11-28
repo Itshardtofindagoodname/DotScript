@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="images/s.png" title="Favicon"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <title>Generic Chatbot</title>
+</head>
+<body>
+  <div id="/generic"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const showChatbot = false;
+
+      function loadChatbot() {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.botpress.cloud/webchat/v0/inject.js';
+        script.async = true;
+        document.body.appendChild(script);
+
+        script.onload = function () {
+          window.botpressWebChat.init({
+            "composerPlaceholder": "Search anything you want to know",
+            "botConversationDescription": "For your daily medical queries.",
+            "botId": "d083e677-3b58-485d-abfd-4587d169fe71",
+            "clientId": "d083e677-3b58-485d-abfd-4587d169fe71",
+            "hostUrl": "https://cdn.botpress.cloud/webchat/v0",
+            "messagingUrl": "https://messaging.botpress.cloud",
+            "avatarUrl": "https://www.pngkey.com/png/detail/126-1266220_stethoscope-svg-png-icon-free-download-medical-icon.png",
+            "emailAddress": "debarjunthakur020@gmail.com",
+            "botName": "Generic Bot",
+            "containerWidth": "100%25",
+            "layoutWidth": "100%25",
+            "hideWidget": true,
+            "disableAnimations": true,
+            "frontendVersion": "v1",
+            "useSessionStorage": true,
+            "showBotInfoPage": false,
+            "enableConversationDeletion": true,
+            "theme": "prism",
+            "themeColor": "#2563eb"
+          });
+
+          window.botpressWebChat.onEvent(
+            function () {
+              window.botpressWebChat.sendEvent({ type: "show" });
+            },
+            ["LIFECYCLE.LOADED"]
+          );
+        };
+      }
+
+      function showLoadingOverlay() {
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.id = 'loading-overlay';
+        loadingOverlay.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black';
+
+        loadingOverlay.innerHTML = `
+          <svg class="h-8 w-8 text-gray-300 animate-bounce mr-3" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 24 24">
+            <circle class="opacity-100" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="100"></circle>
+            <path class="opacity-75" fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+            </path>
+          </svg>
+
+          <span class="text-gray-600 text-3xl font-bold animate-pulse">Loading...</span>
+        `;
+
+        document.body.appendChild(loadingOverlay);
+      }
+
+      function hideLoadingOverlay() {
+        const loadingOverlay = document.getElementById('loading-overlay');
+        if (loadingOverlay) {
+          loadingOverlay.remove();
+        }
+      }
+
+      function init() {
+        if (showChatbot) {
+          loadChatbot();
+        } else {
+          showLoadingOverlay();
+          setTimeout(function () {
+            hideLoadingOverlay();
+            loadChatbot();
+          }, 2000);
+        }
+      }
+
+      init();
+    });
+  </script>
+</body>
+</html>
